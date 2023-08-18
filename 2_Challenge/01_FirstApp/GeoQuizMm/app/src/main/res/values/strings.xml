@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">GeoQuizMm</string>
+    <string name="question_text">Beijing is the capital of China.</string>
+    <string name="true_button">True</string>
+    <string name="false_button">False</string>
+    <string name="correct_toast">Correct!</string>
+    <string name="incorrect_toast">Incorrect!</string>
+</resources>
