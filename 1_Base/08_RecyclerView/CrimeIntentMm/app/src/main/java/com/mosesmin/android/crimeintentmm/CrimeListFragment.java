@@ -16,7 +16,7 @@ import java.util.List;
 /**
  * @Misson&Goal 代码以交朋友、传福音
  * @ClassName CrimeListFragment
- * @Description TODO
+ * @Description TODO  核心的RecyclerView使用示例类
  * @Author MosesMin
  * @Date 2023-08-28 22:30:16
  * @Version 1.0
@@ -45,6 +45,9 @@ public class CrimeListFragment extends Fragment {
         mCrimeRecyclerView.setAdapter(mAdapter);
     }
 
+    /**
+     * ViewHolder: 容纳View，每个ItemView都需要有一个ViewHolder
+     */
     private class CrimeHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         private Crime mCrime;
 
@@ -72,6 +75,9 @@ public class CrimeListFragment extends Fragment {
         }
     }
 
+    /**
+     * Adapter：为RecyclerView创建ViewHolder，同时将ItemView所需的数据获取并绑定到ViewHolder
+     */
     private class CrimeAdapter extends RecyclerView.Adapter<CrimeHolder>{
         private List<Crime> mCrimes;
 
