@@ -32,8 +32,14 @@ import java.util.List;
 public class CrimeListFragment extends Fragment {
     private static final String TAG = "CrimeListFragment";
 
+    // 13.4.2 13-19 保存子标题状态值
+    private static final String SAVED_SUBTITLE_VISIBLE = "subtitle";
+
+
     private RecyclerView mCrimeRecyclerView;
     private CrimeAdapter mAdapter;
+    // 13.4.1 13-15 记录子标题状态
+    private boolean mSubtitleVisible;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -48,6 +54,11 @@ public class CrimeListFragment extends Fragment {
         mCrimeRecyclerView = (RecyclerView) view.findViewById(R.id.crime_recycler_view);
         mCrimeRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
+        // 13.4.2 13-19 保存子标题状态值
+        if (savedInstanceState != null){
+            mSubtitleVisible = savedInstanceState.getBoolean(SAVED_SUBTITLE_VISIBLE);
+        }
+
         updateUI();
         return view;
     }
@@ -58,10 +69,26 @@ public class CrimeListFragment extends Fragment {
         updateUI();
     }
 
+    // 13.4.2 13-19 保存子标题状态值
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putBoolean(SAVED_SUBTITLE_VISIBLE,mSubtitleVisible);
+    }
+
+
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
         inflater.inflate(R.menu.fragment_crime_list,menu);
+
+        // 13.4.1  13-16 更新菜单项
+        MenuItem subtitleItem = menu.findItem(R.id.show_subtitle);
+        if (mSubtitleVisible){
+            subtitleItem.setTitle(R.string.hide_subtitle);
+        }else{
+            subtitleItem.setTitle(R.string.show_subtitle);
+        }
     }
 
     @Override
@@ -74,18 +101,30 @@ public class CrimeListFragment extends Fragment {
                         .newIntent(getActivity(), crime.getId());
                 startActivity(intent);
                 return true;
+
+            // 13.4  13-14 调用 updateSubtitle() 方法响应新增菜单项的单击事件 显示crime条数
             case R.id.show_subtitle:
+                mSubtitleVisible = !mSubtitleVisible;
+                // 13.4.1  13-16 更新菜单项
+                getActivity().invalidateOptionsMenu();
                 updateSubtitle();
+
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
 
+    // 13.4 13-13 设置工具栏子标题 子标题需显示crime记录条数
     private void updateSubtitle(){
         CrimeLab crimeLab = CrimeLab.getInstance(getActivity());
         int crimeCount = crimeLab.getCrimes().size();
         String subtitle = getString(R.string.subtitle_format,crimeCount);
+
+        // 13.4.1 13-17 实现菜单项标题与子标题的联动
+        if (!mSubtitleVisible){
+            subtitle = null;
+        }
 
         AppCompatActivity activity = (AppCompatActivity) getActivity();
         activity.getSupportActionBar().setSubtitle(subtitle);
@@ -101,6 +140,8 @@ public class CrimeListFragment extends Fragment {
             mAdapter.notifyDataSetChanged();
         }
 
+        // 13.4.2 解决：子标题显示后，旋转设备，子标题显示的总记录数不会更新以及 显示的子标题会消失 本质是在onResume中调用updateSubtitle
+        updateSubtitle();
     }
 
     /**
