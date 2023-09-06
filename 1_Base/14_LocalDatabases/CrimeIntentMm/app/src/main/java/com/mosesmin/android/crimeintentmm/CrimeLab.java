@@ -13,12 +13,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 /**
+ *
  * @Misson&Goal 代码以交朋友、传福音
  * @ClassName CrimeLab
  * @Description TODO
  * @Author MosesMin
  * @Date 2023-08-28 22:26:48
  * @Version 1.0
+ *
  */
 public class CrimeLab {
     private static final String TAG = "CrimeLab";
@@ -71,6 +73,7 @@ public class CrimeLab {
     }
 
     // 14.5.2 创建模型层对象 14-19 重写getCrime(UUID)方法
+    // ? ：问号？是Sql中的占位符：若要创建每次使用不同值的查询，可以在查询中使用参数。参数是在运行查询时所提供值的占位符。
     public Crime getCrime(UUID id){
         CrimeCursorWrapper cursor = queryCrimes(
                 CrimeTable.Cols.UUID + " = ?",

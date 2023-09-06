@@ -1,12 +1,14 @@
 package com.mosesmin.android.crimeintentmm.database;
 
 /**
+ *
  * @Misson&Goal 代码以交朋友、传福音
  * @ClassName CrimeDbSchema
  * @Description TODO
  * @Author MosesMin
  * @Date 2023-09-06 00:03:17
  * @Version 1.0
+ *
  */
 
 // 14.1 定义schema

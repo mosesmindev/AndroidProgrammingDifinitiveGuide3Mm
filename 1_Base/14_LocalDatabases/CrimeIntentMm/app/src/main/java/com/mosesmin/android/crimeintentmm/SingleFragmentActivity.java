@@ -6,12 +6,14 @@ import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 
 /**
+ *
  * @Misson&Goal 代码以交朋友、传福音
  * @ClassName SingleFragmentActivity
  * @Description TODO 封装的单例FragmentActivity
  * @Author MosesMin
  * @Date 2023-08-28 22:28:01
  * @Version 1.0
+ *
  */
 public abstract class SingleFragmentActivity extends AppCompatActivity {
 
