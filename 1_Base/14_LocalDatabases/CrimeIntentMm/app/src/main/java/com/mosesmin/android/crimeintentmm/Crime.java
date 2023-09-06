@@ -19,14 +19,8 @@ public class Crime {
     private Date mDate;
     private boolean mSolved;
 
-    // 14.5.1 使用CursorWrapper  14-15 新增Crime构造方法
     public Crime() {
-       this(UUID.randomUUID());
-    }
-
-    // 14.5.1 使用CursorWrapper  14-15 新增Crime构造方法
-    public Crime(UUID id) {
-        mId = id;
+        mId = UUID.randomUUID();
         mDate = new Date();
     }
 

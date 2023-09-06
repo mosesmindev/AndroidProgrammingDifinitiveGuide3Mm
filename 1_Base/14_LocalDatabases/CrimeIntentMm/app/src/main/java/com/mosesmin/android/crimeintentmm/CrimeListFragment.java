@@ -137,9 +137,6 @@ public class CrimeListFragment extends Fragment {
             mAdapter = new CrimeAdapter(crimes);
             mCrimeRecyclerView.setAdapter(mAdapter);
         }else{
-            // 14.5.2 创建模型层对象 14-21 调用setCrimes(List<Crime>)方法
-            mAdapter.setCrimes(crimes);
-
             mAdapter.notifyDataSetChanged();
         }
 
@@ -210,11 +207,6 @@ public class CrimeListFragment extends Fragment {
         @Override
         public int getItemCount() {
             return mCrimes.size();
-        }
-
-        // 14.5.2 创建模型层对象 14-20 添加setCrimes(List<Crime>)方法
-        public void setCrimes(List<Crime> crimes) {
-            mCrimes = crimes;
         }
     }
 
