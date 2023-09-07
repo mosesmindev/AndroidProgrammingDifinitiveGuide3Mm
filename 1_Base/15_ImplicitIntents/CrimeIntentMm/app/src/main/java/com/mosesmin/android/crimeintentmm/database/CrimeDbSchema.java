@@ -11,7 +11,7 @@ package com.mosesmin.android.crimeintentmm.database;
  *
  */
 
-// 14.1 定义schema
+// 14.1 定义schema 数据库大纲 schema意为大纲
 public class CrimeDbSchema {
     private static final String TAG = "CrimeDbSchema";
 
@@ -25,6 +25,8 @@ public class CrimeDbSchema {
             public static final String TITLE = "title";
             public static final String DATE = "date";
             public static final String SOLVED = "solved";
+            //15.2 添加嫌疑人信息至模型层 15-3 添加嫌疑人数据库字段
+            public static final String SUSPECT = "suspect";
         }
     }
 }

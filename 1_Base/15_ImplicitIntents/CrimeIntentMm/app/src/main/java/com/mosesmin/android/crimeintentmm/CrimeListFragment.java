@@ -104,7 +104,7 @@ public class CrimeListFragment extends Fragment {
                 startActivity(intent);
                 return true;
 
-            // 13.4  13-14 调用 updateSubtitle() 方法响应新增菜单项的单击事件 显示crime条数
+            // 13.4  13-14 调用updateSubtitle()方法响应新增菜单项的单击事件，显示crime条数
             case R.id.show_subtitle:
                 mSubtitleVisible = !mSubtitleVisible;
                 // 13.4.1  13-16 更新菜单项
@@ -117,7 +117,7 @@ public class CrimeListFragment extends Fragment {
         }
     }
 
-    // 13.4 13-13 设置工具栏子标题 子标题需显示crime记录条数
+    // 13.4 13-13 设置工具栏子标题，子标题需显示crime记录条数
     private void updateSubtitle(){
         CrimeLab crimeLab = CrimeLab.getInstance(getActivity());
         int crimeCount = crimeLab.getCrimes().size();
@@ -145,7 +145,8 @@ public class CrimeListFragment extends Fragment {
             mAdapter.notifyDataSetChanged();
         }
 
-        // 13.4.2 解决：子标题显示后，旋转设备，子标题显示的总记录数不会更新以及 显示的子标题会消失 本质是在onResume中调用updateSubtitle
+        // 13.4.2 解决：子标题显示后，旋转设备，子标题显示的总记录数不会更新以及显示的子标题会消失；
+        // 在updateUI方法中调用updateSubtitle方法，问题得以解决；本质是在onResume中调用updateSubtitle
         updateSubtitle();
     }
 
@@ -178,10 +179,7 @@ public class CrimeListFragment extends Fragment {
 
         @Override
         public void onClick(View v) {
-            //Toast.makeText(getActivity(), mCrime.getTitle()+" clicked!", Toast.LENGTH_SHORT).show();
             Log.i(TAG, "onClick: Hosting Activity is :" + getActivity().getClass().getName());
-            //Intent intent = new Intent(getActivity(),CrimeActivity.class);
-            //Intent intent = CrimeActivity.newIntent(getActivity(),mCrime.getId());
             Intent intent = CrimePagerActivity.newIntent(getActivity(),mCrime.getId());
             startActivity(intent);
         }

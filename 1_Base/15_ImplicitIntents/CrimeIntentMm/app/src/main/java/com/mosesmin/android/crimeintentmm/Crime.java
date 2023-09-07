@@ -21,6 +21,9 @@ public class Crime {
     private Date mDate;
     private boolean mSolved;
 
+    //15.2 添加嫌疑人信息至模型层 15-2 添加mSuspect成员变量
+    private String mSuspect;
+
     // 14.5.1 使用CursorWrapper  14-15 新增Crime构造方法
     public Crime() {
        this(UUID.randomUUID());
@@ -58,5 +61,12 @@ public class Crime {
 
     public void setSolved(boolean solved) {
         mSolved = solved;
+    }
+
+    public String getSuspect() {
+        return mSuspect;
+    }
+    public void setSuspect(String suspect) {
+        mSuspect = suspect;
     }
 }

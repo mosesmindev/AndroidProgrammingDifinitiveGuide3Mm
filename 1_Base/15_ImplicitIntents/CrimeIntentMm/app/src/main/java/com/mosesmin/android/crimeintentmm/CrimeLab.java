@@ -31,7 +31,7 @@ public class CrimeLab {
     private SQLiteDatabase mDatabase;
 
     /**
-     * Singleton methods of CrimeLab
+     * Singleton methods of CrimeLab, CrimeLab的单例方法
      * @param context
      * @return
      */
@@ -115,12 +115,15 @@ public class CrimeLab {
         return new CrimeCursorWrapper(cursor);
     }
 
-    // 14.4.1 使用ContentValues 写入数据库 14-8 创建ContentValues
+    // 14.4.1 使用ContentValues写入数据库 14-8 创建ContentValues
     private static ContentValues getContentValues(Crime crime) {ContentValues values = new ContentValues();
         values.put(CrimeTable.Cols.UUID, crime.getId().toString());
         values.put(CrimeTable.Cols.TITLE, crime.getTitle());
         values.put(CrimeTable.Cols.DATE, crime.getDate().getTime());
         values.put(CrimeTable.Cols.SOLVED, crime.isSolved() ? 1 : 0);
+        //15.2 添加嫌疑人信息至模型层 15-5 写入嫌疑人信息
+        // 即，更新CrimeLab.getContentValues(Crime)方法中的数据库写入代码
+        values.put(CrimeTable.Cols.SUSPECT, crime.getSuspect());
         return values;
     }
 

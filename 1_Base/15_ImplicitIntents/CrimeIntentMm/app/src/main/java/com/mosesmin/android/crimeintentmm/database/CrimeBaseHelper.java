@@ -17,7 +17,7 @@ import com.mosesmin.android.crimeintentmm.database.CrimeDbSchema.CrimeTable;
  *
  */
 
-// 14.2 创建初始数据库 14-3 创建CrimeBaseHelper 类
+// 14.2 创建初始数据库 14-3 创建CrimeBaseHelper类
 public class CrimeBaseHelper extends SQLiteOpenHelper {
     private static final String TAG = "CrimeBaseHelper";
 
@@ -35,7 +35,9 @@ public class CrimeBaseHelper extends SQLiteOpenHelper {
                 CrimeTable.Cols.UUID + ", " +
                 CrimeTable.Cols.TITLE + ", " +
                 CrimeTable.Cols.DATE + ", " +
-                CrimeTable.Cols.SOLVED +
+                CrimeTable.Cols.SOLVED + ", " +
+                //15.2 添加嫌疑人信息至模型层 15-4 添加嫌疑人数据库字段
+                CrimeTable.Cols.SUSPECT +
                 ")"
         );
     }

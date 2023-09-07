@@ -16,12 +16,13 @@ import java.util.UUID;
  *
  * @Misson&Goal 代码以交朋友、传福音
  * @ClassName CrimePagerActivity
- * @Description TODO
+ * @Description TODO 作为CrimeFragment的托管Activity
  * @Author MosesMin
  * @Date 2023-08-30 23:23:39
  * @Version 1.0
  *
  */
+
 public class CrimePagerActivity extends AppCompatActivity {
     private static final String TAG = "CrimePagerActivity";
 
