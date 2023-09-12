@@ -71,4 +71,9 @@ public class Crime {
     public void setSuspect(String suspect) {
         mSuspect = suspect;
     }
+
+    //16.2.2 指定照片存放位置 16-5 添加文件名获取方法
+    public String getPhotoFilename() {
+        return "IMG_" + getId().toString() + ".jpg";
+    }
 }
