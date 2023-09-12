@@ -19,8 +19,8 @@
 
             <ImageView
                 android:id="@+id/crime_photo"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
+                android:layout_width="128dp"
+                android:layout_height="128dp"
                 android:background="@android:color/darker_gray"
                 android:cropToPadding="true"
                 android:scaleType="centerInside" />

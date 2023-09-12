@@ -95,7 +95,7 @@ public class CrimeLab {
     //16.2.2 指定照片存放位置 16-6 定位照片文件
     public File getPhotoFile(Crime crime) {
         File filesDir = mContext.getFilesDir();
-        return new File(filesDir, crime.getPhotoFilename());
+        return new File(filesDir, crime.getPhotoFileName());
     }
 
     // 14.4.2 插入和更新记录 14-10 更新记录

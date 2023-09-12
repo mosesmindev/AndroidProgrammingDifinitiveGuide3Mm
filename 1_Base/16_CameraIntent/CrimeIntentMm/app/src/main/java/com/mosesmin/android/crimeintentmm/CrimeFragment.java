@@ -16,6 +16,7 @@ import android.support.v4.content.FileProvider;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.text.format.DateFormat;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -210,7 +211,7 @@ public class CrimeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Uri uri = FileProvider.getUriForFile(getActivity(),
-                        "com.bignerdranch.android.criminalintent.fileprovider", mPhotoFile);
+                        "com.mosesmin.android.crimeintentmm.fileprovider", mPhotoFile);
                 captureImage.putExtra(MediaStore.EXTRA_OUTPUT, uri);
                 List<ResolveInfo> cameraActivities = getActivity()
                         .getPackageManager().queryIntentActivities(captureImage,
@@ -270,7 +271,7 @@ public class CrimeFragment extends Fragment {
             // 16.4 缩放和显示位图 16-12 调用updatePhotoView()方法
         }else if (requestCode == REQUEST_PHOTO) {
             Uri uri = FileProvider.getUriForFile(getActivity(),
-                    "com.bignerdranch.android.criminalintent.fileprovider",
+                    "com.mosesmin.android.crimeintentmm.fileprovider",
                     mPhotoFile);
             getActivity().revokeUriPermission(uri,
                     Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
@@ -309,7 +310,7 @@ public class CrimeFragment extends Fragment {
     }
 
     //16.4 缩放和显示位图 16-11 更新mPhotoView
-    private void updatePhotoView() {
+    private void updatePhotoViewBookSource() {
         if (mPhotoFile == null || !mPhotoFile.exists()) {
             mPhotoView.setImageDrawable(null);
         } else {
@@ -318,4 +319,67 @@ public class CrimeFragment extends Fragment {
             mPhotoView.setImageBitmap(bitmap);
         }
     }
+
+    //16.4 缩放和显示位图 16-11 更新mPhotoView
+    // 和工作的实际需求有关
+    private void updatePhotoView() {
+        if (mPhotoFile == null || !mPhotoFile.exists()) {
+            mPhotoView.setImageDrawable(null);
+        } else {
+            Bitmap bitmap = PictureUtils.getScaledBitmap(
+                    mPhotoFile.getPath(), getActivity());
+            Log.i(TAG, "updatePhotoView: bitmap is:" + bitmap);
+            Log.i(TAG, "updatePhotoView: bitmap width is:" + bitmap.getWidth() + ",bitmap height is:" + bitmap.getHeight());
+            // 参考如下两篇博客 将拍摄的照片统一设置为宽高为128*128
+            // https://blog.csdn.net/CHenhong_666/article/details/107109982
+            // https://blog.csdn.net/u013597998/article/details/51093728
+            int dpi = getDpi();
+            int scaleProportion = (int) dpi/160;
+            int goalWidth = 128;
+            int goalHeight = 128;
+            Log.i(TAG, "updatePhotoView: device dpi is:" + dpi);
+            Bitmap goalBitmap = PictureUtils.getFixedSizeBitmap(bitmap,scaleProportion*goalWidth,scaleProportion*goalHeight);
+            Log.i(TAG, "updatePhotoView: goalBitmap is:" + goalBitmap);
+            Log.i(TAG, "updatePhotoView: goalBitmap width is:" + goalBitmap.getWidth() + ",goalBitmap height is:" + goalBitmap.getHeight());
+            mPhotoView.setImageBitmap(goalBitmap);
+        }
+    }
+
+    //16.4 缩放和显示位图 16-11 更新mPhotoView
+    // 和工作的实际需求有关 updatePhotoViewB()方法可以替代updatePhotoView()
+    private void updatePhotoViewB() {
+        if (mPhotoFile == null || !mPhotoFile.exists()) {
+            mPhotoView.setImageDrawable(null);
+        } else {
+            Bitmap bitmap = PictureUtils.getScaledBitmap(
+                    mPhotoFile.getPath(), getActivity());
+            Log.i(TAG, "updatePhotoView: bitmap is:" + bitmap);
+            Log.i(TAG, "updatePhotoView: bitmap width is:" + bitmap.getWidth() + ",bitmap height is:" + bitmap.getHeight());
+            // https://blog.csdn.net/CHenhong_666/article/details/107109982
+            // https://blog.csdn.net/u013597998/article/details/51093728
+            float density = getDensity();
+            int goalWidth = 128;
+            int goalHeight = 128;
+            Log.i(TAG, "updatePhotoView: device density is:" + density);
+            Bitmap goalBitmap = PictureUtils.getFixedSizeBitmap(bitmap,(int)density*goalWidth,(int) density*goalHeight);
+            Log.i(TAG, "updatePhotoView: goalBitmap is:" + goalBitmap);
+            Log.i(TAG, "updatePhotoView: goalBitmap width is:" + goalBitmap.getWidth() + ",goalBitmap height is:" + goalBitmap.getHeight());
+            mPhotoView.setImageBitmap(goalBitmap);
+        }
+    }
+
+    private int getDpi() {
+        DisplayMetrics dm = new DisplayMetrics();
+        getActivity().getWindowManager().getDefaultDisplay().getMetrics(dm);
+        int density = dm.densityDpi;
+        return density;
+    }
+
+    private float getDensity() {
+        DisplayMetrics dm = new DisplayMetrics();
+        getActivity().getWindowManager().getDefaultDisplay().getMetrics(dm);
+        return dm.density;// dm.density=  densityDpi/160
+    }
+
+
 }

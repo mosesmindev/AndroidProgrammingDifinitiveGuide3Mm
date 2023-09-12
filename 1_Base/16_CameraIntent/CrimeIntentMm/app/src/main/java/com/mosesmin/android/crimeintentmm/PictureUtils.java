@@ -55,7 +55,7 @@ public class PictureUtils {
     }
 
     // 3 与工作有关  与学习项目无关   https://blog.csdn.net/jian11058/article/details/103140215
-    // @YinHua你好，dab logo有两个问题：1.设置想要的图片大小时候参数文档有吗，
+    // @xx 你好，logo有两个问题：1.设置想要的图片大小时候参数文档有吗，
     // 具体我设置几能返回多大的图片，现有的文档里没写这块。
     // 2，有没有一个办法可以无论图片尺寸多大，只返这个台最大的logo回来？
 
