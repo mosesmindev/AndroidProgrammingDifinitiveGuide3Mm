@@ -1,0 +1,4 @@
+<resources>
+    <!-- 17-5 用于大屏幕设备的可选资源-->
+    <item name="activity_masterdetail" type="layout">@layout/activity_twopane</item>
+</resources>

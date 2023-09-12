@@ -1,0 +1,4 @@
+<resources>
+    <!-- 17-3 创建默认的别名资源值-->
+    <item name="activity_masterdetail" type="layout">@layout/activity_fragment</item>
+</resources>
