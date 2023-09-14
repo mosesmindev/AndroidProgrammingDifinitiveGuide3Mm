@@ -1,0 +1,4 @@
+<!--16.2.1 使用FileProvider 16-3 填写路径描述-->
+<paths>
+    <files-path name="crime_photos" path="."/>
+</paths>
