@@ -23,6 +23,7 @@ public class PictureUtils {
     public static Bitmap getScaledBitmap(String path, int destWidth, int destHeight){
         // Read in the dimension of the image on disk
         BitmapFactory.Options options = new BitmapFactory.Options();
+
         options.inJustDecodeBounds = true;
         BitmapFactory.decodeFile(path,options);
 
