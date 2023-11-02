@@ -78,7 +78,6 @@ public class CrimeFragment extends Fragment {
             }
         });
         // 代码清单7-14 监听CheckBox的变化（CrimeFragment.java） -- end
-
         return v;
     }
     // 代码清单7-11 覆盖onCreateView(...)方法（CrimeFragment.java） -- end
