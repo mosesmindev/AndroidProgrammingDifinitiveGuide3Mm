@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">CriminalIntentMm</string>
+    <!-- 代码清单7-6 添加字符串资源（res/values/strings.xml） start -->
+    <string name="crime_title_hint">Enter a title for the crime.</string>
+    <string name="crime_title_label">Title</string>
+    <string name="crime_details_label">Details</string>
+    <string name="crime_solved_label">Solved</string>
+    <!-- 代码清单7-6 添加字符串资源（res/values/strings.xml） end -->
+</resources>

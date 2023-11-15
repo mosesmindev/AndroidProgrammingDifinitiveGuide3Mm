@@ -4,7 +4,7 @@ android {
     compileSdkVersion 25
     buildToolsVersion '25.0.2'
     defaultConfig {
-        applicationId "com.mosesmin.android.crimeintentmm"
+        applicationId "com.mosesmin.android.criminalintentmm"
         minSdkVersion 19
         targetSdkVersion 25
         versionCode 1
