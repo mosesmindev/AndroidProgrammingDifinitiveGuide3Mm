@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.mosesmin.android.criminalintentmm">
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.CriminalIntentMm">
+        <!--    代码清单8-12 声明CrimeListActivity为launcher activity（AndroidManifest.xml） //start   -->
+        <activity android:name=".CrimeListActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <!--    代码清单8-12 声明CrimeListActivity为launcher activity（AndroidManifest.xml） //end   -->
+        <!-- 代码清单11-5 添加 CrimePagerActivity 到manifest配置文件（AndroidManifest.xml） // start -->
+        <!--  <activity android:name=".CrimeActivity">-->
+            <activity android:name=".CrimePagerActivity">
+        <!-- 代码清单11-5 添加 CrimePagerActivity 到manifest配置文件（AndroidManifest.xml） // end -->
+        </activity>
+    </application>
+
+</manifest>
