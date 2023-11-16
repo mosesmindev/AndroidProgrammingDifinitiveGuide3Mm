@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">CriminalIntentMm</string>
+    <!-- 代码清单7-6 添加字符串资源（res/values/strings.xml） start -->
+    <string name="crime_title_hint">Enter a title for the crime.</string>
+    <string name="crime_title_label">Title</string>
+    <string name="crime_details_label">Details</string>
+    <string name="crime_solved_label">Solved</string>
+    <!-- 代码清单7-6 添加字符串资源（res/values/strings.xml） end -->
+
+    <!--代码清单12-1 为对话框标题添加字符串资源（values/strings.xml） // start-->
+    <string name="date_picker_title">Date of crime:</string>
+    <!--代码清单12-1 为对话框标题添加字符串资源（values/strings.xml） // end-->
+</resources>
