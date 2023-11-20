@@ -15,6 +15,7 @@
     <string name="new_crime">New Crime</string>
     <string name="show_subtitle">Show Subtitle</string>
     <string name="hide_subtitle">Hide Subtitle</string>
+    <string name="subtitle_format">%1$d+%2$d=%1$d crimes</string>
     <!--  代码清单13-3 添加字符串资源（res/values/strings.xml） // end  -->
 
 </resources>

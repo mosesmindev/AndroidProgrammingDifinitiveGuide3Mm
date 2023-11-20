@@ -31,16 +31,18 @@ public class CrimeLab {
 
     private CrimeLab(Context context){
         mCrimes = new ArrayList<>();
+        // 代码清单13-9 再见，随机crime记录！（CrimeLab.java） -- start
         // 代码清单8-3 生成100个crime（CrimeLab.java） -- start
-        for (int i = 0; i < 100; i++) {
-            Crime crime = new Crime();
-            crime.setTitle("Crime # "+i);
-            crime.setSolved(i % 2 == 0);
-            mCrimes.add(crime);
-        }
         // 代码清单8-3 生成100个crime（CrimeLab.java） -- end
+        // 代码清单13-9 再见，随机crime记录！（CrimeLab.java） -- end
     }
     // 代码清单8-1 创建单例（CrimeLab.java） -- end
+
+    // 代码清单13-8 添加新的crime（CrimeLab.java） -- start
+    public void addCrime(Crime c){
+        mCrimes.add(c);
+    }
+    // 代码清单13-8 添加新的crime（CrimeLab.java） -- end
 
     public List<Crime> getCrimes(){
         return mCrimes;

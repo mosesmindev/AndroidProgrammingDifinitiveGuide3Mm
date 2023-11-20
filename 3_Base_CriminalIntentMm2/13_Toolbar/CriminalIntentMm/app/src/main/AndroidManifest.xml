@@ -17,10 +17,15 @@
             </intent-filter>
         </activity>
         <!--    代码清单8-12 声明CrimeListActivity为launcher activity（AndroidManifest.xml） //end   -->
+
         <!-- 代码清单11-5 添加 CrimePagerActivity 到manifest配置文件（AndroidManifest.xml） // start -->
+        <!-- 代码清单13-11 启用向上按钮（AndroidManifest.xml）  添加parentActivityName属性// start  -->
         <!--  <activity android:name=".CrimeActivity">-->
-            <activity android:name=".CrimePagerActivity">
+            <activity android:name=".CrimePagerActivity"
+                android:parentActivityName=".CrimeListActivity">
+        <!-- 代码清单13-11 启用向上按钮（AndroidManifest.xml）  添加parentActivityName属性// end  -->
         <!-- 代码清单11-5 添加 CrimePagerActivity 到manifest配置文件（AndroidManifest.xml） // end -->
+
         </activity>
     </application>
 

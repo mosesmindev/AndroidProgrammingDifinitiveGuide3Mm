@@ -3,12 +3,14 @@ package com.mosesmin.android.criminalintentmm;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -29,6 +31,10 @@ public class CrimeListFragment extends Fragment {
     private static final String TAG = "CrimeListFragment";
     // 代码清单8-11 实现CrimeListFragment（CrimeListFragment.java） -- end
 
+    // 代码清单13-19 保存子标题状态值（CrimeListFragment.java） -- start1
+    private static final String SAVED_SUBTITLE_VISIBLE = "subtitle";
+    // 代码清单13-19 保存子标题状态值（CrimeListFragment.java） -- end1
+
     // 代码清单8-16 为CrimeListFragment配置视图（CrimeListFragment.java） -- start1
     private RecyclerView mCrimeRecyclerView;
     // 代码清单8-16 为CrimeListFragment配置视图（CrimeListFragment.java） -- end1
@@ -36,6 +42,10 @@ public class CrimeListFragment extends Fragment {
     // 代码清单8-20 设置Adapter（CrimeListFragment.java） -- start2
     private CrimeAdapter mAdapter;
     // 代码清单8-20 设置Adapter（CrimeListFragment.java） -- end2
+
+    // 代码清单13-15 记录子标题状态（CrimeListFragment.java） -- start
+    private boolean mSubtitleVisible;
+    // 代码清单13-15 记录子标题状态（CrimeListFragment.java） -- end
 
     // 代码清单13-7 调用 setHasOptionsMenu 方法（CrimeListFragment.java） -- start
     @Override
@@ -51,6 +61,13 @@ public class CrimeListFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_crime_list, container, false);
         mCrimeRecyclerView = (RecyclerView) view.findViewById(R.id.crime_recycler_view);
         mCrimeRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+        // 代码清单13-19 保存子标题状态值（CrimeListFragment.java） -- start2
+        if (savedInstanceState != null) {
+            mSubtitleVisible = savedInstanceState.getBoolean(SAVED_SUBTITLE_VISIBLE);
+        }
+        // 代码清单13-19 保存子标题状态值（CrimeListFragment.java） -- end2
+
         // 代码清单8-20 设置Adapter（CrimeListFragment.java） -- start3
         updateUI();
         // 代码清单8-20 设置Adapter（CrimeListFragment.java） -- end3
@@ -67,13 +84,71 @@ public class CrimeListFragment extends Fragment {
     }
     // 代码清单10-9 在 onResume() 方法中刷新列表项（CrimeListFragment.java） -- end1
 
+    // 代码清单13-19 保存子标题状态值（CrimeListFragment.java） -- start3
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putBoolean(SAVED_SUBTITLE_VISIBLE, mSubtitleVisible);
+    }
+    // 代码清单13-19 保存子标题状态值（CrimeListFragment.java） -- end3
+
     // 代码清单13-6 实例化选项菜单（CrimeListFragment.java） -- start
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
         inflater.inflate(R.menu.fragment_crime_list,menu);
+
+        // 代码清单13-16 更新菜单项（CrimeListFragment.java） -- start1
+        MenuItem subtitleItem = menu.findItem(R.id.show_subtitle);
+        if (mSubtitleVisible){
+            subtitleItem.setTitle(R.string.hide_subtitle);
+        }else{
+            subtitleItem.setTitle(R.string.show_subtitle);
+        }
+        // 代码清单13-16 更新菜单项（CrimeListFragment.java） -- end1
     }
     // 代码清单13-6 实例化选项菜单（CrimeListFragment.java） -- end
+
+    // 代码清单13-10 响应菜单项选择事件（CrimeListFragment.java） -- start
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch(item.getItemId()){
+            case R.id.new_crime:
+                Crime crime = new Crime();
+                CrimeLab.getInstance(getActivity()).addCrime(crime);
+                Intent intent = CrimePagerActivity
+                        .newIntent(getActivity(), crime.getId());
+                startActivity(intent);
+                return true;
+            case R.id.show_subtitle:
+                // 代码清单13-16 更新菜单项（CrimeListFragment.java） -- start2
+                mSubtitleVisible = !mSubtitleVisible;
+                getActivity().invalidateOptionsMenu();
+                // 代码清单13-16 更新菜单项（CrimeListFragment.java） -- end2
+                updateSubtitle();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+    // 代码清单13-10 响应菜单项选择事件（CrimeListFragment.java） -- end
+
+    // 代码清单13-13 设置工具栏子标题（CrimeListFragment.java） -- start
+    private void updateSubtitle(){
+        CrimeLab crimeLab = CrimeLab.getInstance(getActivity());
+        int crimeCount = crimeLab.getCrimes().size();
+        String subtitle = getString(R.string.subtitle_format,crimeCount,0);
+
+        // 代码清单13-17 实现菜单项标题与子标题的联动（CrimeListFragment.java） -- start
+        if (!mSubtitleVisible){
+            subtitle = null;
+        }
+        // 代码清单13-17 实现菜单项标题与子标题的联动（CrimeListFragment.java） -- end
+
+        AppCompatActivity activity = (AppCompatActivity) getActivity();
+        activity.getSupportActionBar().setSubtitle(subtitle);
+    }
+    // 代码清单13-13 设置工具栏子标题（CrimeListFragment.java） -- end
 
     // 代码清单8-17 定义ViewHolder内部类（CrimeListFragment.java） -- start
     private class CrimeHolder extends RecyclerView.ViewHolder
@@ -196,6 +271,9 @@ public class CrimeListFragment extends Fragment {
         }
         // 代码清单10-9 在 onResume() 方法中刷新列表项（CrimeListFragment.java） -- end3
 
+        // 代码清单13-18 显示最新状态（CrimeListFragment.java） 后退键返回CrimeListActivity 界面更新子标题的记录数刷新  -- start
+        updateSubtitle();
+        // 代码清单13-18 显示最新状态（CrimeListFragment.java） 后退键返回CrimeListActivity 界面更新子标题的记录数刷新  -- end
     }
     // 代码清单8-20 设置Adapter（CrimeListFragment.java） -- end1
 
