@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 代码清单8-15 在布局文件中添加RecyclerView视图（fragment_crime_list.xml） // start -->
+<android.support.v7.widget.RecyclerView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/crime_recycler_view"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+</android.support.v7.widget.RecyclerView>
+    <!-- 代码清单8-15 在布局文件中添加RecyclerView视图（fragment_crime_list.xml） // end -->
