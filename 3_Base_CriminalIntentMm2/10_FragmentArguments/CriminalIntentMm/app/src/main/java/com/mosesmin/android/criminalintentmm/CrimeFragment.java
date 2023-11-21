@@ -105,7 +105,7 @@ public class CrimeFragment extends Fragment {
         mSolvedCheckBox.setOnCheckedChangeListener(new OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-
+				mCrime.setSolved(isChecked);
             }
         });
         // 代码清单7-14 监听CheckBox的变化（CrimeFragment.java） -- end

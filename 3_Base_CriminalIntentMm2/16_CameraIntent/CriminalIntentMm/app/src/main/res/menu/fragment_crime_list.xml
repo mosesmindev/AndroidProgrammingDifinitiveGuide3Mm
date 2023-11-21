@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <!--  代码清单13-4 创建菜单资源（res/menu/fragment_crime_list.xml） // start  -->
+    <item
+        android:id="@+id/new_crime"
+        android:icon="@drawable/ic_menu_add"
+        android:title="@string/new_crime"
+        app:showAsAction="ifRoom|withText"/>
+    <!--  代码清单13-4 创建菜单资源（res/menu/fragment_crime_list.xml） // end  -->
+
+    <!--  代码清单13-12 添加SHOW SUBTITLE菜单项（res/menu/fragment_crime_list.xml） // start  -->
+    <item
+        android:id="@+id/show_subtitle"
+        android:title="@string/show_subtitle"
+        app:showAsAction="ifRoom"/>
+    <!--  代码清单13-12 添加SHOW SUBTITLE菜单项（res/menu/fragment_crime_list.xml） // end  -->
+</menu>
