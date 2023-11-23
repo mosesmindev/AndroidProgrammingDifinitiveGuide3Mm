@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--代码清单17-3 创建默认的别名资源值（res/values/refs.xml） // start-->
+    <item name="activity_masterdetail" type="layout">@layout/activity_fragment</item>
+    <!--代码清单17-3 创建默认的别名资源值（res/values/refs.xml） // end-->
+</resources>

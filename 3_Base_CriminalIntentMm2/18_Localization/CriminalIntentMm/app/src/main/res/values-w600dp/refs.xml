@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--代码清单17-5 用于大屏幕设备的可选资源（res/values-sw600dp/refs.xml）  // start  -->
+    <item name="activity_masterdetail" type="layout">@layout/activity_twopane</item>
+    <!--代码清单17-5 用于大屏幕设备的可选资源（res/values-sw600dp/refs.xml）  // end  -->
+</resources>
