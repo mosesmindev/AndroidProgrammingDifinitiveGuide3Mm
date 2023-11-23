@@ -145,9 +145,14 @@ public class CrimeListFragment extends Fragment {
             case R.id.new_crime:
                 Crime crime = new Crime();
                 CrimeLab.getInstance(getActivity()).addCrime(crime);
-                Intent intent = CrimePagerActivity
+                // 代码清单17-9 调用全部回调方法（CrimeListFragment.java） -- start1
+                /*Intent intent = CrimePagerActivity
                         .newIntent(getActivity(), crime.getId());
-                startActivity(intent);
+                startActivity(intent);*/
+
+                updateUI();
+                mCallbacks.onCrimeSelected(crime);
+                // 代码清单17-9 调用全部回调方法（CrimeListFragment.java） -- end1
                 return true;
             case R.id.show_subtitle:
                 // 代码清单13-16 更新菜单项（CrimeListFragment.java） -- start2
@@ -230,8 +235,11 @@ public class CrimeListFragment extends Fragment {
         // 代码清单8-24 检测用户点击事件（CrimeListFragment.java） -- start3
         @Override
         public void onClick(View v) {
-            /*Toast.makeText(getActivity(),
-                    mCrime.getTitle() + " clicked!", Toast.LENGTH_SHORT).show();*/
+            // 代码清单17-9 调用全部回调方法（CrimeListFragment.java） -- start2
+
+            /*
+            *//*Toast.makeText(getActivity(),
+                    mCrime.getTitle() + " clicked!", Toast.LENGTH_SHORT).show();*//*
             // 代码清单10-1 启动 CrimeActivity （CrimeListFragment.java） -- start
             // 代码清单10-3 传递 Crime 实例（CrimeListFragment.java） -- start
             //Intent intent = new Intent(getActivity(),CrimeActivity.class);
@@ -242,6 +250,10 @@ public class CrimeListFragment extends Fragment {
             // 代码清单10-3 传递 Crime 实例（CrimeListFragment.java） -- end
             startActivity(intent);
             // 代码清单10-1 启动 CrimeActivity （CrimeListFragment.java） -- end
+            */
+
+            mCallbacks.onCrimeSelected(mCrime);
+            // 代码清单17-9 调用全部回调方法（CrimeListFragment.java） -- end2
         }
         // 代码清单8-24 检测用户点击事件（CrimeListFragment.java） -- end3
 
@@ -291,7 +303,10 @@ public class CrimeListFragment extends Fragment {
     }
 
     // 代码清单8-20 设置Adapter（CrimeListFragment.java） -- start1
-    private void updateUI(){
+    // 代码清单17-10 修改 updateUI() 方法的可见性（CrimeListFragment.java） -- start
+    //private void updateUI(){
+    public void updateUI(){
+    // 代码清单17-10 修改 updateUI() 方法的可见性（CrimeListFragment.java） -- end
         CrimeLab crimeLab = CrimeLab.getInstance(getActivity());
         List<Crime> crimes = crimeLab.getCrimes();
 

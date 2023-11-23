@@ -40,7 +40,7 @@ public class CrimeFragment extends Fragment {
     // 代码清单12-3 显示 DialogFragment （CrimeFragment.java） -- end1
 
     // 代码清单12-8 设置目标fragment（CrimeFragment.java） -- start1
-    public static final int REQUEST_CODE = 0;
+    public static final int REQUEST_DATE = 0;
     // 代码清单12-8 设置目标fragment（CrimeFragment.java） -- end1
 
 
@@ -129,7 +129,7 @@ public class CrimeFragment extends Fragment {
                 DatePickerFragment dialog = DatePickerFragment
                         .newInstance(mCrime.getDate());
                 // 代码清单12-8 设置目标fragment（CrimeFragment.java） -- start2
-                dialog.setTargetFragment(CrimeFragment.this,REQUEST_CODE);
+                dialog.setTargetFragment(CrimeFragment.this,REQUEST_DATE);
                 // 代码清单12-8 设置目标fragment（CrimeFragment.java） -- end2
                 // 代码清单12-6 添加 newInstance() 方法（CrimeFragment.java） -- end
                 dialog.show(manager, DIALOG_DATE);
@@ -160,7 +160,7 @@ public class CrimeFragment extends Fragment {
         if (resultCode != Activity.RESULT_OK){
             return;
         }
-        if (requestCode == REQUEST_CODE){
+        if (requestCode == REQUEST_DATE){
             Date date = (Date)data.getSerializableExtra(DatePickerFragment.EXTRA_DATE);
             mCrime.setDate(date);
             // 代码清单12-12 高亮选取日期按钮更新代码（CrimeFragment.java） -- start

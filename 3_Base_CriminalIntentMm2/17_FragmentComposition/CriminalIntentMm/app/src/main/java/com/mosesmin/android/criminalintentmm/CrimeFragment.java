@@ -2,6 +2,7 @@ package com.mosesmin.android.criminalintentmm;
 
 // 代码清单7-9 导入支持库版 Fragment（CrimeFragment.java）
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
@@ -55,7 +56,7 @@ public class CrimeFragment extends Fragment {
     // 代码清单12-3 显示 DialogFragment （CrimeFragment.java） -- end1
 
     // 代码清单12-8 设置目标fragment（CrimeFragment.java） -- start1
-    public static final int REQUEST_CODE = 0;
+    public static final int REQUEST_DATE = 0;
     // 代码清单12-8 设置目标fragment（CrimeFragment.java） -- end1
 
     // 代码清单15-11 添加嫌疑人按钮成员变量（CrimeFragment.java） -- start1
@@ -88,6 +89,17 @@ public class CrimeFragment extends Fragment {
     private ImageView mPhotoView;
     // 代码清单16-1 添加实例变量（CrimeFragment.java） -- end1
 
+    // 代码清单17-11 新增 CrimeFragment 回调接口（CrimeFragment.java） -- start1
+    private Callbacks mCallbacks;
+    /**
+     * 要求托管Activity实现的接口
+     * Required interface for hosting activities
+     */
+    public interface Callbacks {
+        void onCrimeUpdated(Crime crime);
+    }
+    // 代码清单17-11 新增 CrimeFragment 回调接口（CrimeFragment.java） -- end1
+
     // 代码清单10-6 编写 newInstance(UUID) 方法（CrimeFragment.java） -- start2
     public static CrimeFragment newInstance(UUID crimeId){
         Bundle args = new Bundle();
@@ -98,6 +110,14 @@ public class CrimeFragment extends Fragment {
         return fragment;
     }
     // 代码清单10-6 编写 newInstance(UUID) 方法（CrimeFragment.java） -- end2
+
+    // 代码清单17-11 新增 CrimeFragment 回调接口（CrimeFragment.java） -- start2
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        mCallbacks = (Callbacks) context;
+    }
+    // 代码清单17-11 新增 CrimeFragment 回调接口（CrimeFragment.java） -- end2
 
     // 代码清单7-10 覆盖 Fragment.onCreate(Bundle) 方法（CrimeFragment.java）
     @Override
@@ -128,6 +148,14 @@ public class CrimeFragment extends Fragment {
     }
     // 代码清单14-11  Crime 数据刷新（CrimeFragment.java） -- end
 
+    // 代码清单17-11 新增 CrimeFragment 回调接口（CrimeFragment.java） -- start3
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        mCallbacks = null;
+    }
+    // 代码清单17-11 新增 CrimeFragment 回调接口（CrimeFragment.java） -- end3
+
     // 代码清单7-11 覆盖onCreateView(...)方法（CrimeFragment.java） -- start
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -147,6 +175,9 @@ public class CrimeFragment extends Fragment {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 mCrime.setTitle(s.toString());
+                // 代码清单17-15 调用 onCrimeUpdated(Crime) 方法（CrimeFragment.java） -- start1
+                updateCrime();
+                // 代码清单17-15 调用 onCrimeUpdated(Crime) 方法（CrimeFragment.java） -- end1
             }
 
             @Override
@@ -172,7 +203,7 @@ public class CrimeFragment extends Fragment {
                 DatePickerFragment dialog = DatePickerFragment
                         .newInstance(mCrime.getDate());
                 // 代码清单12-8 设置目标fragment（CrimeFragment.java） -- start2
-                dialog.setTargetFragment(CrimeFragment.this,REQUEST_CODE);
+                dialog.setTargetFragment(CrimeFragment.this,REQUEST_DATE);
                 // 代码清单12-8 设置目标fragment（CrimeFragment.java） -- end2
                 // 代码清单12-6 添加 newInstance() 方法（CrimeFragment.java） -- end
                 dialog.show(manager, DIALOG_DATE);
@@ -191,6 +222,9 @@ public class CrimeFragment extends Fragment {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 mCrime.setSolved(isChecked);
+                // 代码清单17-15 调用 onCrimeUpdated(Crime) 方法（CrimeFragment.java） -- start2
+                updateCrime();
+                // 代码清单17-15 调用 onCrimeUpdated(Crime) 方法（CrimeFragment.java） -- end2
             }
         });
         // 代码清单7-14 监听CheckBox的变化（CrimeFragment.java） -- end
@@ -282,12 +316,17 @@ public class CrimeFragment extends Fragment {
         if (resultCode != Activity.RESULT_OK){
             return;
         }
-        if (requestCode == REQUEST_CODE){
+        if (requestCode == REQUEST_DATE){
             Date date = (Date)data.getSerializableExtra(DatePickerFragment.EXTRA_DATE);
             mCrime.setDate(date);
             // 代码清单12-12 高亮选取日期按钮更新代码（CrimeFragment.java） -- start
             // mDateButton.setText(mCrime.getDate().toString());  // Refactor → Extract Method...
             // 代码清单12-12 高亮选取日期按钮更新代码（CrimeFragment.java） -- end
+
+            // 代码清单17-16 再次调用 updateCrime() 方法（CrimeFragment.java） -- start1
+            updateCrime();
+            // 代码清单17-16 再次调用 updateCrime() 方法（CrimeFragment.java） -- end1
+
             // 代码清单12-13 使用 updateDate() 私有方法（CrimeFragment.java） -- start2
             updateDate();
             // 代码清单12-13 使用 updateDate() 私有方法（CrimeFragment.java） -- end2
@@ -312,8 +351,11 @@ public class CrimeFragment extends Fragment {
             // Pull out the first column of the first row of data -
             // that is your suspect's name
                 c.moveToFirst();
-                String suspect = c.getString(0); // 为什么传0？
+                String suspect = c.getString(0); // 为什么传0？因为c moveToFirst了
                 mCrime.setSuspect(suspect);
+                // 代码清单17-16 再次调用 updateCrime() 方法（CrimeFragment.java） -- start2
+                updateCrime();
+                // 代码清单17-16 再次调用 updateCrime() 方法（CrimeFragment.java） -- end2
                 mSuspectButton.setText(suspect);
             } finally {
                 c.close();
@@ -327,11 +369,20 @@ public class CrimeFragment extends Fragment {
                     mPhotoFile);
             getActivity().revokeUriPermission(uri,
                     Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+            // 代码清单17-16 再次调用 updateCrime() 方法（CrimeFragment.java） -- start3
+            updateCrime();
+            // 代码清单17-16 再次调用 updateCrime() 方法（CrimeFragment.java） -- end3
             updatePhotoView();
         }
         // 代码清单16-12 调用 updatePhotoView() 方法（CrimeFragment.java） -- end2
     }
 
+    // 代码清单17-14 新增 updateCrime() 方法（CrimeFragment.java） -- start
+    private void updateCrime() {
+        CrimeLab.getInstance(getActivity()).updateCrime(mCrime);
+        mCallbacks.onCrimeUpdated(mCrime);
+    }
+    // 代码清单17-14 新增 updateCrime() 方法（CrimeFragment.java） -- end
 
     // 代码清单12-13 使用 updateDate() 私有方法（CrimeFragment.java） -- start1
     private void updateDate() {

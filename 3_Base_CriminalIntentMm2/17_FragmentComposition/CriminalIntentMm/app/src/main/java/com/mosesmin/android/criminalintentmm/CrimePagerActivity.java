@@ -20,7 +20,11 @@ import java.util.UUID;
  * @Author: MosesMin
  * @Date: 2023-11-15 22:02:44
  */
-public class CrimePagerActivity extends AppCompatActivity {
+public class CrimePagerActivity extends AppCompatActivity
+    // 代码清单17-13 空接口实现（CrimePagerActivity.java） -- start1
+    implements CrimeFragment.Callbacks {
+    // 代码清单17-13 空接口实现（CrimePagerActivity.java） -- end1
+
     private static final String TAG = "CrimePagerActivity";
     // 代码清单11-3 创建 newIntent 方法（CrimePagerActivity.java） -- start1
     public static final String EXTRA_CRIME_ID = "com.mosesmin.android.criminalintentmm.crime_id";
@@ -77,4 +81,11 @@ public class CrimePagerActivity extends AppCompatActivity {
         // 代码清单11-6 设置初始分页显示项（CrimePagerActivity.java）-- end
     }
     // 代码清单11-1 创建 ViewPager （CrimePagerActivity.java） -- end
+
+    // 代码清单17-13 空接口实现（CrimePagerActivity.java） -- start2
+    @Override
+    public void onCrimeUpdated(Crime crime) {
+
+    }
+    // 代码清单17-13 空接口实现（CrimePagerActivity.java） -- end2
 }
