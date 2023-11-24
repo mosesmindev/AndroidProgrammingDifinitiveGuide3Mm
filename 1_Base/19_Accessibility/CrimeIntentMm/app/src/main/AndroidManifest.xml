@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.mosesmin.android.crimeintentmm">
+
+    <!--16.5 功能声明 16-13 添加<uses-feature>标签-->
+    <uses-feature android:name="android.hardware.camera"
+        android:required="false" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity
+            android:name=".CrimePagerActivity"
+            android:parentActivityName=".CrimeListActivity">
+        </activity>
+
+        <activity android:name=".CrimeListActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!--16.2.1 使用FileProvider 16-2 添加FileProvider声明-->
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="com.mosesmin.android.crimeintentmm.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <!--16-4 关联使用路径描述资源 -->
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/files"/>
+        </provider>
+
+    </application>
+
+</manifest>

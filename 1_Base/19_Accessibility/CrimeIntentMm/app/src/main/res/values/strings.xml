@@ -1,0 +1,39 @@
+<resources>
+    <string name="app_name">CriminalIntentMm</string>
+    <string name="crime_title_hint">Enter a title for the crime.</string>
+    <string name="crime_title_label">Title</string>
+    <string name="crime_details_label">Details</string>
+    <string name="crime_solved_label">Solved</string>
+
+    <!--代码清单19-1 添加内容描述字符串（res/values/strings.xml） // start-->
+    <string name="crime_photo_button_description" translatable="false">Take photo of crime scene</string>
+    <string name="crime_photo_no_image_description" translatable="false">Crime scene photo (not set)</string>
+    <string name="crime_photo_image_description" translatable="false">Crime scene photo (set)</string>
+    <!--代码清单19-1 添加内容描述字符串（res/values/strings.xml） // end-->
+
+    <string name="date_picker_title">Date of crime:</string>
+    <string name="new_crime">New Crime</string>
+    <string name="show_subtitle">Show Subtitle</string>
+    <string name="hide_subtitle">Hide Subtitle</string>
+    <string name="subtitle_format">%1$d crimes</string>
+
+    <string name="crime_suspect_text">Choose Suspect</string>
+    <string name="crime_report_text">Send Crime Report</string>
+
+    <!--  15-7 添加字符串资源
+        %1$s 、 %2$s 等特殊字符串即为占位符，它们接受字符串参数。
+        在代码中，我们将调用getString(...) 方法，并传入格式化字符串资源ID以及另外四个字符串参数（与要替换的占位
+符顺序一致）。
+    -->
+    <string name="crime_report">%1$s!
+        The crime was discovered on %2$s. %3$s, and %4$s
+    </string>
+
+
+    <string name="crime_report_solved">The case is solved</string>
+    <string name="crime_report_unsolved">The case is not solved</string>
+    <string name="crime_report_no_suspect">there is no suspect.</string>
+    <string name="crime_report_suspect">the suspect is %s.</string>
+    <string name="crime_report_subject">CriminalIntent Crime Report</string>
+    <string name="send_report">Send crime report via</string>
+</resources>
