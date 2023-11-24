@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 代码清单18-5 创建宽屏中文版字符串资源（values-zh-w600dp/strings.xml） // start   -->
+    <string name="crime_title_hint">
+        请输入简短、好记的crime 描述
+    </string>
+    <!-- 代码清单18-5 创建宽屏中文版字符串资源（values-zh-w600dp/strings.xml） // end   -->
+</resources>

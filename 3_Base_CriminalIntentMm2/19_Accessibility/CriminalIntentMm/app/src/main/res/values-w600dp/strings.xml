@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--代码清单18-4 针对宽屏的字符串资源（values-w600dp/strings.xml） // start-->
+    <string name="crime_title_hint">
+        Enter a meaningful, memorable title for the crime.
+    </string>
+    <!--代码清单18-4 针对宽屏的字符串资源（values-w600dp/strings.xml） // end-->
+</resources>
