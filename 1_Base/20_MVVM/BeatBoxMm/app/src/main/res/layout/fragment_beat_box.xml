@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    代码清单20-5 把一般布局改造为数据绑定布局（res/layout/fragment_beat_box.xml）
+    通过在最外层标签添加layout的方式
+    -->
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android">
+<!-- 代码清单20-1 创建主布局文件（res/layout/fragment_beat_box.xml） -->
+<android.support.v7.widget.RecyclerView
+
+    android:id="@+id/recycler_view"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"/>
+</layout>
