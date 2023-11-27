@@ -5,12 +5,15 @@ import android.content.res.AssetManager;
 import android.util.Log;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @Version: 1.0
  * @Misson&Goal: 代码以交朋友、传福音
  * @Project:BeatBoxMm
- * @Description: TODO
+ * @Description: TODO 资源管理类
+ *                      在应用中进行定位、管理记录以及播放 assets资源。
  * @Author: MosesMin
  * @Date: 2023-11-26 22:36:20
  */
@@ -23,6 +26,9 @@ public class BeatBox {
     // 代码清单20-13 获取 AssetManager 备用（BeatBox.java）
     // 使用 AssetManager 类访问assets。可以从 Context 中获取它。
     private AssetManager mAssets;
+
+    // 代码清单20-17 创建 Sound 列表（BeatBox.java）
+    private List<Sound> mSounds = new ArrayList<>();
 
     /**
      * @param context
@@ -48,5 +54,17 @@ public class BeatBox {
             Log.e(TAG, "Could not list assets", ioe);
             return;
         }
+
+        // 代码清单20-17 创建 Sound 列表（BeatBox.java）
+        for (String filename : soundNames) {
+            String assetPath = SOUNDS_FOLDER + "/" + filename;
+            Sound sound = new Sound(assetPath);
+            mSounds.add(sound);
+        }
+    }
+
+    // 代码清单20-17 创建 Sound 列表（BeatBox.java）
+    public List<Sound> getSounds() {
+        return mSounds;
     }
 }
