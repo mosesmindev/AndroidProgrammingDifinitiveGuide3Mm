@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+代码清单23-7 使用layer list drawable（res/drawable/button_beat_box_pressed.xml）
+将shape作为layer-list的一个item
+layer-list: 图层列表
+layer list drawable中指定了两个drawable。第一个是和以前一样的红圈。第二个则会绘
+制在第一个圈上，它定义了一个4dp粗的深红圈。这会产生一个暗红的圈。
+这两个drawable可以组成一个layer list drawable。多个当然也可以，会获得一些更复杂的
+效果。
+-->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <!--代码清单23-4 定义按钮按下时的shape drawable（res/drawable/button_beat_box_pressed.xml）-->
+        <shape xmlns:android="http://schemas.android.com/apk/res/android"
+            android:shape="oval">
+            <solid
+                android:color="@color/red"/>
+        </shape>
+    </item>
+    <item>
+        <shape
+            android:shape="oval">
+            <stroke
+                android:width="4dp"
+                android:color="@color/dark_red"/>
+        </shape>
+    </item>
+</layer-list>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--代码清单23-5 创建一个state list drawable（res/drawable/button_beat_box.xml）-->
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!--代码清单23-9 使用新背景图（res/drawable/button_beat_box.xml） -->
+    <!--<item android:drawable="@drawable/button_beat_box_pressed"-->
+    <item android:drawable="@drawable/ic_button_beat_box_pressed"
+        android:state_pressed="true"/>
+    <!--<item android:drawable="@drawable/button_beat_box_normal" />-->
+    <item android:drawable="@drawable/ic_button_beat_box_default"/>
+</selector>
