@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+    <!--代码清单22-1 定义几种颜色（res/values/colors.xml） // start-->
+    <color name="red">#F44336</color>
+    <color name="dark_red">#C3352B</color>
+    <color name="gray">#607D8B</color>
+    <color name="soothing_blue">#0083BF</color>
+    <color name="dark_blue">#005A8A</color>
+    <!--代码清单22-1 定义几种颜色（res/values/colors.xml） // end-->
+
+    <!--
+    代码清单22-8 改用深色主题（res/values/styles.xml）
+    // start1
+    引入书中颜色配置资源
+    -->
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <!--
+    代码清单22-8 改用深色主题（res/values/styles.xml）
+    // end1
+    引入书中颜色配置资源
+    -->
+
+</resources>

@@ -1,0 +1,93 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <!--
+    代码清单22-8 改用深色主题（res/values/themes.xml） // start2
+    注释掉项目生成主题配置
+    -->
+    <!--<style name="Theme.BeatBoxMm" parent="Theme.AppCompat.Light.DarkActionBar">
+        &lt;!&ndash; Primary brand color. &ndash;&gt;
+        <item name="colorPrimary">@color/purple_500</item>
+        <item name="colorPrimaryDark">@color/purple_700</item>
+        <item name="colorAccent">@color/teal_200</item>
+        &lt;!&ndash; Customize your theme here. &ndash;&gt;
+    </style>-->
+
+    <!--
+    代码清单22-8 改用深色主题（res/values/themes.xml） //  end2
+    注释掉项目生成主题配置
+    -->
+
+    <!--
+    代码清单22-8 改用深色主题（res/values/themes.xml） // start3
+    修改为随书颜色配置 并改为使用深色主题 Theme.AppCompat
+    -->
+    <style name="Theme.BeatBoxMm" parent="Theme.AppCompat">
+        <!-- Primary brand color. -->
+        <!--
+        代码清单22-9 自定义主题属性（res/values/themes.xml） // start
+        colorPrimaryDark  状态栏 电量 时间那栏
+        colorPrimary 工具栏
+        colorAccent  和colorPrimary形成颜色反差效果  主要用于给类似 EditText 这样的组件着色
+        colorPrimaryDark、colorPrimary、colorAccent 三个属性最好能配套使用（虽然有时colorAccent配置无效 比如对Button控件就无效）
+        -->
+        <item name="colorPrimary">@color/red</item>
+        <item name="colorPrimaryDark">@color/dark_red</item>
+        <item name="colorAccent">@color/gray</item>
+
+        <!--
+        代码清单22-9 自定义主题属性（res/values/themes.xml） // end
+        -->
+
+        <!--代码清单22-10 设置窗口背景（res/values/styles.xml） // 修改应用主题背景色  -->
+        <item name="android:windowBackground">@color/soothing_blue</item>
+
+        <!--代码清单22-13 使用 BeatBoxMmButton 样式（res/values/themes.xml）-->
+        <item name="buttonStyle">@style/BeatBoxMmButton</item>
+
+        <!-- Customize your theme here. -->
+    </style>
+    <!--
+    代码清单22-8 改用深色主题（res/values/themes.xml） // end3
+    修改为随书颜色配置 并改为使用深色主题 Theme.AppCompat
+    -->
+
+
+    <!--代码清单22-2 添加样式（res/values/themes.xml） // start-->
+    <!--
+        代码清单22-12 创建按钮样式（res/values/themes.xml）
+        // start1
+        parent="Widget.AppCompat.Button"
+    -->
+    <style name="BeatBoxMmButton" parent="Widget.AppCompat.Button">
+        <!--
+            代码清单22-12 创建按钮样式（res/values/themes.xml）
+            // end1
+            parent="Widget.AppCompat.Button"
+        -->
+        <item name="android:background">@color/dark_blue</item>
+    </style>
+    <!--代码清单22-2 添加样式（res/values/themes.xml） // end-->
+
+    <!--
+        代码清单22-12 创建按钮样式（res/values/themes.xml）
+        // start2
+        删除 继承样式 BeatBoxMmButton.Strong
+    -->
+    <!--代码清单22-4 继承样式（res/values/themes.xml） 方式1 父样式名称.子样式 // start-->
+    <!--<style name="BeatBoxMmButton.Strong">
+        <item name="android:textStyle">bold</item>
+    </style>-->
+    <!--代码清单22-4 继承样式（res/values/themes.xml） 方式1 父样式名称.子样式// end-->
+
+    <!--代码清单22-4 继承样式（res/values/themes.xml） 方式2  parent属性引入父样式 // start-->
+    <!--<style name="StrongBeatBoxMmButton" parent="@style/BeatBoxMmButton">
+        <item name="android:textStyle">bold</item>
+    </style>-->
+    <!--代码清单22-4 继承样式（res/values/themes.xml） 方式2  parent属性引入父样式 // end-->
+    <!--
+        代码清单22-12 创建按钮样式（res/values/themes.xml）
+        // end2
+        删除 继承样式 BeatBoxMmButton.Strong
+    -->
+
+</resources>

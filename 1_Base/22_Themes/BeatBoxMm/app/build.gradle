@@ -1,0 +1,49 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 26
+    buildToolsVersion '26.0.2'
+    defaultConfig {
+        applicationId "com.mosesmin.android.beatboxmm"
+        minSdkVersion 19
+        targetSdkVersion 26
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    // 代码清单20-4 启用数据绑定（app/build.gradle）
+    dataBinding {
+        enabled = true
+    }
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    compile 'com.android.support:appcompat-v7:26.1.0'
+    testCompile 'junit:junit:4.12'
+    compile 'com.android.support:recyclerview-v7:26.1.0'
+
+    /*
+    testCompile 作用范围表示，这两个依赖项只需包括在应用的测试编译里。这样就能避免在
+    APK包里捎带上无用代码库。
+     */
+
+    // 代码清单21-6 修改依赖项作用范围（app/build.gradle） -- start
+    // Mockito是一个方便创建虚拟对象的Java框架。有了虚拟对象，就可以单独测试 SoundViewModel ，
+    // 不用担心会因代码关联关系测到其他对象。
+    testCompile 'org.mockito:mockito-core:2.2.1'
+    // Hamcrest是个规则匹配器工具库。匹配器可以方便地在代码里模拟匹配条件。
+    // 如果不能按预期匹配条件定义，测试就通不过。这可以验证代码是否按预期工作。
+    testCompile 'org.hamcrest:hamcrest-junit:2.0.0.0'
+    // 代码清单21-6 修改依赖项作用范围（app/build.gradle） -- end
+
+}

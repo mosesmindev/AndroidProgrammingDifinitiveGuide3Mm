@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+    <!--
+        代码清单20-22 声明视图模型属性（list_item_sound.xml）
+    -->
+    <data>
+        <variable
+            name="viewModel"
+            type="com.mosesmin.android.beatboxmm.SoundViewModel" />
+    </data>
+
+    <!--
+        代码清单20-23 绑定按钮文件名（list_item_sound.xml）
+        android:text="@{viewModel.title}"
+
+        在绑定表达式里，可以写一些简单的Java表达式，如链式方法调用、数学计算等。另外，也可以吃几颗“语法糖”。
+        例如，上述 viewModel.title 实际就是 viewModel.getTitle() 的简写形式。数据绑定知道怎么帮你翻译。
+    -->
+
+
+    <!--
+        代码清单21-15 关联按钮（list_item_sound.xml）
+        布局文件里，添加数据绑定lambda表达式，让按钮对象和onButtonClicked() 方法关联起来。
+        android:onClick="@{() -> viewModel.onButtonClicked()}"
+    -->
+    <!--
+    代码清单22-3 使用样式（res/layout/list_item_sound.xml）
+    style="@style/BeatBoxMmButton"
+    -->
+
+    <!--
+    代码清单22-5 使用粗体文字样式（res/layout/list_item_sound.xml）
+    style="@style/BeatBoxMmButton.Strong"
+    -->
+    <!--
+    代码清单22-11 删掉（删掉原有样式属性 ）！有更好的办法了（使用主题设置）（res/layout/list_item_sound.xml）
+    删除：style="@style/BeatBoxMmButton.Strong"
+    -->
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:onClick="@{() -> viewModel.onButtonClicked()}"
+        android:text="@{viewModel.title}"
+        tools:text="Sound name"/>
+</layout>
