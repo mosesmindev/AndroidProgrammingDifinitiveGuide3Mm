@@ -17,10 +17,6 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-    // 代码清单20-4 启用数据绑定（app/build.gradle）
-    dataBinding {
-        enabled = true
-    }
 }
 
 dependencies {

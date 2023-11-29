@@ -19,7 +19,7 @@ import android.util.Log;
 public abstract class SingleFragmentActivity extends AppCompatActivity {
     private static final String TAG = "SingleFragmentActivity";
     // 代码清单8-8 添加一个通用超类（SingleFragmentActivity.java） -- start
-    protected abstract NerdLauncherFragment createFragment();
+    protected abstract Fragment createFragment();
 
     // 代码清单17-1 增加 SingleFragmentActivity 类的灵活性（SingleFragmentActivity.java） -- start1
     @LayoutRes
