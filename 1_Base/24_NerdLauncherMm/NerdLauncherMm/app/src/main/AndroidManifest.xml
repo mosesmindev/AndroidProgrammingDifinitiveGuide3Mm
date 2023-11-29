@@ -14,6 +14,18 @@
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
+                <!--
+                代码清单24-10 修改NerdLauncher应用的类别（AndroidManifest.xml）
+                // start
+                使用 NerdLauncher 应用作为设备主屏幕
+                -->
+                <category android:name="android.intent.category.HOME" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <!--
+                代码清单24-10 修改NerdLauncher应用的类别（AndroidManifest.xml）
+                // end
+                使用 NerdLauncher 应用作为设备主屏幕
+                -->
             </intent-filter>
         </activity>
     </application>
