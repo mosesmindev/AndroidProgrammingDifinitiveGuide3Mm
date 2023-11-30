@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--FrameLayout 是服务于 CrimeFragment 的容器视图。该容器视图是个通用性视图，不单
+单用于 CrimeFragment 类，你还可以用它托管其他的fragment -->
+<!-- 代码清单7-5 创建fragment容器布局（activity_crime.xml） start -->
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/fragment_container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"/>
+<!-- 代码清单7-5 创建fragment容器布局（activity_crime.xml） end -->
