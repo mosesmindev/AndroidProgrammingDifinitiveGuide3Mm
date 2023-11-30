@@ -55,6 +55,8 @@ public class FlickrFetchr {
     }
 
     // 代码清单25-7 添加一些常量（FlickrFetchr.java） -- 从 Flickr 获取 JSON 数据
+    /* https://api.flickr.com/services/rest/?method=flickr.photos.getRecent&api_key=
+        7e72cd002216b4e9072a3cbe1b9d187e&format=json&nojsoncallback=1 */
     public void fetchItems(){
         try {
             String url = Uri.parse("https://api.flickr.com/services/rest/")

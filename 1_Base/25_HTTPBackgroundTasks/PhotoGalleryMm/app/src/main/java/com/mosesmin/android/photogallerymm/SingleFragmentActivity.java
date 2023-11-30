@@ -35,8 +35,6 @@ public abstract class SingleFragmentActivity extends AppCompatActivity {
         // setContentView(R.layout.activity_fragment);
         setContentView(getLayoutResId());
         // 代码清单17-1 增加 SingleFragmentActivity 类的灵活性（SingleFragmentActivity.java） -- end2
-        /* https://api.flickr.com/services/rest/?method=flickr.photos.getRecent&api_key=
-        7e72cd002216b4e9072a3cbe1b9d187e&format=json&nojsoncallback=1 */
         FragmentManager fm = getSupportFragmentManager();
         Fragment fragment = fm.findFragmentById(R.id.fragment_container);
         Log.d(TAG, "onCreate: fragment = " + fragment); // output: null
