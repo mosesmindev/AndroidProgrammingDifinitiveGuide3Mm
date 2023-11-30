@@ -11,11 +11,10 @@ import android.util.Log;
  * @Version: 1.0
  * @Misson&Goal: 代码以交朋友、传福音
  * @Project:CriminalIntentMm
- * @Description: TODO
+ * @Description: TODO 代码清单8-7 创建一个Activity抽象类（SingleFragmentActivity.java）
  * @Author: MosesMin
  * @Date: 2023-10-30 21:32:45
  */
-// 代码清单8-7 创建一个Activity抽象类（SingleFragmentActivity.java） -- start
 public abstract class SingleFragmentActivity extends AppCompatActivity {
     private static final String TAG = "SingleFragmentActivity";
     // 代码清单8-8 添加一个通用超类（SingleFragmentActivity.java） -- start
@@ -47,4 +46,3 @@ public abstract class SingleFragmentActivity extends AppCompatActivity {
         // 代码清单8-8 添加一个通用超类（SingleFragmentActivity.java） -- end
     }
 }
-// 代码清单8-7 创建一个Activity抽象类（SingleFragmentActivity.java） -- end
