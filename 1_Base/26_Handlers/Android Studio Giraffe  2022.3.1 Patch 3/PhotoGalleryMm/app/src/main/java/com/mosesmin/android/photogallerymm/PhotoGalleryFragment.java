@@ -158,6 +158,7 @@ public class PhotoGalleryFragment extends Fragment {
             // 代码清单25-17 添加adapter更新代码（PhotoGalleryFragment.java） -- end
         }
 
+
         /**
          *  代码清单25-17 添加adapter更新代码（PhotoGalleryFragment.java）
          * @param items The result of the operation computed by {@link #doInBackground}.

@@ -1,8 +1,11 @@
 package com.mosesmin.android.photogallerymm;
 
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -48,8 +51,21 @@ public class PhotoGalleryFragment extends Fragment {
         // 代码清单25-6 实现 AsyncTask 工具类方法，第二部分（PhotoGalleryFragment.java）
         new FetchItemsTask().execute();
 
+        // 代码清单26-11 使用反馈H andler （PhotoGalleryFragment.java） --1
+        Handler responseHandler = new Handler();
         // 代码清单26-5 创建 ThumbnailDownloader （PhotoGalleryFragment.java） -- 2start
-        mThumbnailDownloader = new ThumbnailDownloader<>();
+        mThumbnailDownloader = new ThumbnailDownloader<>(responseHandler);
+
+        // 代码清单26-11 使用反馈H andler （PhotoGalleryFragment.java） --2
+        mThumbnailDownloader.setThumbnailDownloadListener(
+                new ThumbnailDownloader.ThumbnailDownloadListener<PhotoHolder>() {
+                    @Override
+                    public void onThumbnailDownloaded(PhotoHolder photoHolder, Bitmap bitmap) {
+                        Drawable drawable = new BitmapDrawable(getResources(), bitmap);
+                        photoHolder.bindDrawable(drawable);
+                    }
+                }
+        );
         mThumbnailDownloader.start();
         mThumbnailDownloader.getLooper();
         Log.i(TAG, "Background thread started");
@@ -68,6 +84,15 @@ public class PhotoGalleryFragment extends Fragment {
         return v;
     }
     // 代码清单25-2 一些代码片断（PhotoGalleryFragment.java） -- end
+
+    /**
+     * 代码清单26-14 调用清理方法（PhotoGalleryFragment.java）
+     */
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        mThumbnailDownloader.clearQueue();
+    }
 
     // 代码清单26-5 创建 ThumbnailDownloader （PhotoGalleryFragment.java） -- 3start
     @Override
@@ -133,7 +158,7 @@ public class PhotoGalleryFragment extends Fragment {
             photoHolder.bindDrawable(placeholder);
 
             // 代码清单26-6 让 ThumbnailDownloader 跑起来（PhotoGalleryFragment.java）
-            //mThumbnailDownloader.queueThumbnail(photoHolder,galleryItem.getUrl());
+            mThumbnailDownloader.queueThumbnail(photoHolder,galleryItem.getUrl());
         }
 
         @Override

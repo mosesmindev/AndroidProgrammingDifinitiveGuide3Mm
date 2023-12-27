@@ -1,9 +1,15 @@
 package com.mosesmin.android.photogallerymm;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Handler;
 import android.os.HandlerThread;
+import android.os.Message;
 import android.util.Log;
 
+import com.mosesmin.android.photogallerymm.net.FlickrFetchr;
+
+import java.io.IOException;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
@@ -28,8 +34,41 @@ public class ThumbnailDownloader<T> extends HandlerThread {
     private ConcurrentMap<T,String> mRequestMap = new ConcurrentHashMap<>();
     // 代码清单26-7 添加一些常量和成员变量（ThumbnailDownloader.java） -- 2end
 
-    public ThumbnailDownloader(){
+    // 代码清单26-10 处理消息（ThumbnailDownloader.java） -- 1start
+    private Handler mResponseHandler;
+    private ThumbnailDownloadListener<T> mThumbnailDownloadListener;
+
+    public interface ThumbnailDownloadListener<T> {
+        void onThumbnailDownloaded(T target, Bitmap thumbnail);
+    }
+
+    public void setThumbnailDownloadListener(ThumbnailDownloadListener<T> listener) {
+        mThumbnailDownloadListener = listener;
+    }
+    // 代码清单26-10 处理消息（ThumbnailDownloader.java） -- 1end
+
+    // 代码清单26-10 处理消息（ThumbnailDownloader.java） -- 2
+    public ThumbnailDownloader(Handler responseHandler) {
         super(TAG);
+        mResponseHandler = responseHandler;
+    }
+
+    /**
+     * 代码清单26-9 处理消息（ThumbnailDownloader.java） -- 1
+     */
+    @Override
+    protected void onLooperPrepared() {
+        super.onLooperPrepared();
+        mRequestHandler = new Handler(){
+            @Override
+            public void handleMessage(Message msg) {
+                if (msg.what == MESSAGE_DOWNLOAD){
+                    T target = (T) msg.obj;
+                    Log.i(TAG, "Got a request for URL: " + mRequestMap.get(target));
+                    handleRequest(target);
+                }
+            }
+        };
     }
 
     /**
@@ -58,6 +97,48 @@ public class ThumbnailDownloader<T> extends HandlerThread {
             mRequestHandler.obtainMessage(MESSAGE_DOWNLOAD,target).sendToTarget();
         }
         // 代码清单26-8 获取和发送消息（ThumbnailDownloader.java） -- end
+    }
+
+
+
+    /**
+     * 代码清单26-13 添加清理方法（ThumbnailDownloader.java）
+     */
+    public void clearQueue() {
+        mRequestHandler.removeMessages(MESSAGE_DOWNLOAD);
+        mRequestMap.clear();
+    }
+
+    /**
+     * 代码清单26-9 处理消息（ThumbnailDownloader.java） --2
+     * @param target
+     */
+    private void handleRequest(final T target) {
+        try {
+            final String url = mRequestMap.get(target);
+            if (url == null) {
+                return;
+            }
+            byte[] bitmapBytes = new FlickrFetchr().getUrlBytes(url);
+            final Bitmap bitmap = BitmapFactory
+                    .decodeByteArray(bitmapBytes, 0, bitmapBytes.length);
+            Log.i(TAG, "Bitmap created");
+
+            // 代码清单26-12 图片下载与显示（ThumbnailDownloader.java） -- start
+            mResponseHandler.post(new Runnable() {
+                public void run() {
+                    if (mRequestMap.get(target) != url ||
+                            mHasQuit) {
+                        return;
+                    }
+                    mRequestMap.remove(target);
+                    mThumbnailDownloadListener.onThumbnailDownloaded(target, bitmap);
+                }
+            });
+            // 代码清单26-12 图片下载与显示（ThumbnailDownloader.java） -- end
+        } catch (IOException ioe) {
+            Log.e(TAG, "Error downloading image", ioe);
+        }
     }
 }
 // 代码清单26-4 初始线程代码（ThumbnailDownloader.java） -- end
