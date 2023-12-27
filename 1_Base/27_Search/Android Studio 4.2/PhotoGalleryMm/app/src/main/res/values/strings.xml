@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">PhotoGalleryMm</string>
+
+    <!--代码清单27-7 添加搜索字符串（res/values/strings.xml） // start-->
+    <string name="search">Search</string>
+    <string name="clear_search">Clear Search</string>
+    <!--代码清单27-7 添加搜索字符串（res/values/strings.xml） // end-->
+</resources>
