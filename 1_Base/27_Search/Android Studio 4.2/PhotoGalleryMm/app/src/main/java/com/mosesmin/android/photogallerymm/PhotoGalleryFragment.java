@@ -46,6 +46,10 @@ public class PhotoGalleryFragment extends Fragment {
     private List<GalleryItem> mItems = new ArrayList<>();
 
     // 代码清单26-5 创建 ThumbnailDownloader （PhotoGalleryFragment.java） --1
+    /*
+    ThumbnailDownloader 的泛型参数支持任何对象，但在这里， PhotoHolder 最合适，因为该
+    视图是最终显示下载图片的地方。
+     */
     private ThumbnailDownloader<PhotoHolder> mThumbnailDownloader;
 
     public static PhotoGalleryFragment newInstance() {

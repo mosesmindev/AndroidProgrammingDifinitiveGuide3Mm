@@ -21,7 +21,13 @@ import java.util.concurrent.ConcurrentMap;
  * @Author: MosesMin
  * @Date: 2023-12-12 22:55:22
  */
+
 // 代码清单26-4 初始线程代码（ThumbnailDownloader.java） -- start
+/*
+ThumbnailDownloader 类使用了 <T> 泛型参数。 ThumbnailDownloader 类的使用者（这
+里指 PhotoGalleryFragment）， 需要使用某些对象来识别每次下载，并确定该使用已下载图片
+更新哪个UI元素。有了泛型参数，实施起来方便了很多。    
+ */
 public class ThumbnailDownloader<T> extends HandlerThread {
     private static final String TAG = "ThumbnailDownloader";
     // 代码清单26-7 添加一些常量和成员变量（ThumbnailDownloader.java） -- 1start
@@ -84,8 +90,8 @@ public class ThumbnailDownloader<T> extends HandlerThread {
     /**
      * 存根方法 ：存根方法是指在一个类中定义的、但不实现的方法。
      * 存根方法通常用于在类的设计阶段，以便在编写代码之前对其进行测试。
-     * @param target
-     * @param url
+     * @param target T target 标识具体那次下载
+     * @param url  下载链接
      */
     public void queueThumbnail(T target,String url){
         Log.i(TAG, "Got a URL:" + url);
@@ -94,6 +100,13 @@ public class ThumbnailDownloader<T> extends HandlerThread {
             mRequestMap.remove(target);
         }else{
             mRequestMap.put(target,url);
+            /*
+            从 mRequestHandler 直接获取到消息后， mRequestHandler 也就自动成为了这个新 Message
+            对象的 target 。这表明 mRequestHandler 会负责处理从消息队列中取出的这个消息。这个消息
+            的 what 属性是 MESSAGE_DOWNLOAD 。它的 obj 属性是传递给 queueThumbnail(...) 方法的 T
+            target 值（这里指 PhotoHolder ）。
+            新消息就代表指定为 T target （ RecyclerView 中的 PhotoHolder ）的下载请求。
+             */
             mRequestHandler.obtainMessage(MESSAGE_DOWNLOAD,target).sendToTarget();
         }
         // 代码清单26-8 获取和发送消息（ThumbnailDownloader.java） -- end
