@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">PhotoGalleryMm</string>
+
+    <!--代码清单27-7 添加搜索字符串（res/values/strings.xml） // start-->
+    <string name="search">Search</string>
+    <string name="clear_search">Clear Search</string>
+    <!--代码清单27-7 添加搜索字符串（res/values/strings.xml） // end-->
+
+    <!-- 代码清单28-12 添加polling字符串资源（res/values/strings.xml） // start-->
+    <string name="start_polling">Start polling</string>
+    <string name="stop_polling">Stop polling</string>
+    <string name="new_pictures_title">New PhotoGallery Pictures</string>
+    <string name="new_pictures_text">You have new pictures in PhotoGallery.</string>
+    <!-- 代码清单28-12 添加polling字符串资源（res/values/strings.xml） // end-->
+</resources>

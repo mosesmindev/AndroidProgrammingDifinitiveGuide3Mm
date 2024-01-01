@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.mosesmin.android.photogallerymm">
+
+    <!--代码清单29-9 添加私有权限（AndroidManifest.xml） 1-->
+    <permission android:name="com.mosesmin.android.photogallerymm.PRIVATE"
+        android:protectionLevel="signature" />
+
+    <!--代码清单25-4 在配置文件中添加网络使用权限（AndroidManifest.xml）-->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <!-- 代码清单28-5 获取网络状态权限（AndroidManifest.xml） -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <!--代码清单29-2 在manifest文件中添加receiver（AndroidManifest.xml） 1-->
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+
+    <!--代码清单29-9 添加私有权限（AndroidManifest.xml） 2-->
+    <uses-permission android:name="com.mosesmin.android.photogallerymm.PRIVATE" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.PhotoGalleryMm">
+        <activity android:name=".PhotoGalleryActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!--代码清单30-8 在配置文件中声明activity（AndroidManifest.xml）-->
+        <activity
+            android:name=".PhotoPageActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize" />
+
+        <!-- 代码清单28-2 在manifest配置文件中添加服务（AndroidManifest.xml） -->
+        <service android:name=".utils.background.service.PollService" />
+
+        <!--代码清单29-2 在manifest文件中添加receiver（AndroidManifest.xml） 2-->
+        <receiver android:name=".StartupReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+            </intent-filter>
+        </receiver>
+
+        <!--代码清单29-15 登记notification receiver（AndroidManifest.xml） -->
+        <receiver android:name=".NotificationReceiver"
+            android:exported="false">
+            <intent-filter android:priority="-999">
+                <action
+                    android:name="com.mosesmin.android.photogallerymm.SHOW_NOTIFICATION" />
+            </intent-filter>
+        </receiver>
+
+    </application>
+
+</manifest>
