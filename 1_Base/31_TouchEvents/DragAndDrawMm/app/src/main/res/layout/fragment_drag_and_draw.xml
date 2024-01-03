@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--代码清单31-4 在布局中添加 BoxDrawingView （fragment_drag_and_draw.xml） -->
+<com.mosesmin.android.draganddrawmm.BoxDrawingView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" />
