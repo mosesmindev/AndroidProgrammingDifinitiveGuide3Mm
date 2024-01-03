@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--代码清单32-2 添加模拟太阳的XML drawable（res/drawable/sun.xml）-->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="oval">
+    <solid android:color="@color/bright_sun" />
+</shape>
