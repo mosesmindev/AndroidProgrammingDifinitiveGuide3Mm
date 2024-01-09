@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">LocatrMm</string>
+    <!--代码清单33-1 添加搜索按钮文字（res/values/strings.xml）-->
+    <string name="search">Find an image near you</string>
+    <string name="title_activity_maps">Map</string>
+</resources>
